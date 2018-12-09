@@ -36,7 +36,7 @@ export default class Register extends PureComponent {
   _storeData = async ({ password, name, email }) => {
     try {
       await AsyncStorage.multiSet([
-        [email, JSON.stringify({ name, password })], ['currentUser', email]
+        [email, JSON.stringify({ name, password })], ['currentUser', JSON.stringify({ name, email })]
       ]);
       this.props.navigation.navigate('App')
     } catch (error) {

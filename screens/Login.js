@@ -20,25 +20,24 @@ export default class Login extends PureComponent {
 
   _checkUser = async (user) => {
     try {
-      const value = await AsyncStorage.getItem(user.email)
+      let value = await AsyncStorage.getItem(user.email)
+      value = JSON.parse(value)
       if (value !== null) {
         if (user.password === value.password) {
-          this.login(value)
+          return this._login(value)
         } else {
-          Alert.alert("Email and password didn't match")
+          return Alert.alert("Email and password didn't match")
         }
       }
-      Alert.alert("Email doesn't exist")
+      return Alert.alert("Email doesn't exist")
     } catch (error) {
       console.log(error)
     }
   }
 
-  _login = async ({ password, name, email }) => {
+  _login = async ({ name, email }) => {
     try {
-      await AsyncStorage.multiSet([
-        [email, JSON.stringify({ name, password })], ['currentUser', email]
-      ]);
+      await AsyncStorage.setItem('currentUser', JSON.stringify({ name, email }))
       this.props.navigation.navigate('App')
     } catch (error) {
       console.log(error)

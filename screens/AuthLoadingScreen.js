@@ -14,8 +14,8 @@ export default class AuthLoadingScreen extends PureComponent {
   }
 
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('currentUser')
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth')
+    const currentUser = await AsyncStorage.getItem('currentUser')
+    this.props.navigation.navigate(currentUser ? 'App' : 'Auth')
   }
 
   render() {
