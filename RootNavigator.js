@@ -2,10 +2,16 @@ import { createSwitchNavigator, createStackNavigator, createAppContainer } from 
 
 import AuthLoadingScreen from './screens/AuthLoadingScreen'
 import Home from './screens/Home'
+import Register from './screens/Register'
 import Login from './screens/Login'
 
 const AppStack = createStackNavigator({ Home })
-const AuthStack = createStackNavigator({ SignIn: Login })
+const AuthStack = createStackNavigator({
+  Register,
+  Login
+}, {
+  initialRouteName: 'Register'
+})
 
 export default createAppContainer(createSwitchNavigator(
   {
